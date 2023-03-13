@@ -162,8 +162,8 @@ Example:
 👤 **Ifeanyi Oti**
 
 - GitHub: [@github](https://github.com/ifeanyi305)
-- Twitter: [@twitter]()
-- LinkedIn: [LinkedIn]()
+- Twitter: [@twitter](https://twitter.com/Otiifeanyi20)
+- LinkedIn: [LinkedIn](https://www.linkedin.com/in/oti-joseph-ifeanyi/)
 
 <!-- FUTURE FEATURES -->
 
