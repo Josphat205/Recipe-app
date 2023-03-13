@@ -149,7 +149,7 @@ Example:
 
 <!-- AUTHORS -->
 
-## 👥 Authors <a name="authors">Josphat Kiploman</a>
+## 👥<a name="authors">Josphat Kiploman</a>
 
 👤 **Josphat Kiploman**
 
@@ -157,7 +157,7 @@ Example:
 - Twitter: [@twitter](https://twitter.com/josphatloman)
 - LinkedIn: [LinkedIn](https://linkedin.com/in/josphat205)
 
-## 👥 Authors <a name="authors">Ifeanyi Oti</a>
+## 👥<a name="authors">Ifeanyi Oti</a>
 
 👤 **Ifeanyi Oti**
 
