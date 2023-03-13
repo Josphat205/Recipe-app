@@ -1,6 +1,7 @@
-class FoodsController < ApplicationController
+# frozen_string_literal: true
 
-    def index
-        puts "Hello World"
-    end
+class FoodsController < ApplicationController
+  def index
+    puts 'Hello World'
+  end
 end
