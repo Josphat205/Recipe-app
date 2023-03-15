@@ -1,5 +1,6 @@
-class UserRecipesController < ApplicationController
+# frozen_string_literal: true
 
+class UserRecipesController < ApplicationController
   def index
     @user_recipes = UserRecipe.created_by_current_user(current_user)
   end
@@ -39,5 +40,4 @@ class UserRecipesController < ApplicationController
   def user_recipe_params
     params.require(:user_recipe).permit(:name, :preparation_time, :cooking_time, :description, :public)
   end
-
 end
