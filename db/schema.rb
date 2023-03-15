@@ -42,7 +42,7 @@ ActiveRecord::Schema[7.0].define(version: 20_230_314_081_800) do
     t.time 'preparation_time'
     t.time 'cooking_time'
     t.text 'description'
-    t.boolean 'public'
+    t.boolean 'public', default: false
     t.bigint 'user_id', null: false
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
