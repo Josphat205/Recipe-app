@@ -1,0 +1,26 @@
+<div class="recipie-section">
+    <% if @user_recipes.empty? %>
+        <h3>You don't have any recipes Yet</h3>
+    <% else %>
+        <% @user_recipes.each do |recipe| %>
+            <div class="recipie-main">
+                <div class="recipie-title">
+                    <h2 class="recipie-name">
+                        <%= link_to(recipe.name, user_recipe_path(recipe)) %>
+                    </h2>
+                    <% if can? :read, recipe %>
+                    <%= button_to "Remove", user_recipe_path(recipe), method: :delete, class: 'Delete-btn' %>
+                    <% end %>
+                </div>
+                <div class="recipie-details">
+                    <p class="recipie-description">
+                        <%= recipe.description %>
+                    </p>
+                </div>
+            </div>
+        <% end %>
+    <% end %>
+    <div>
+        <%= link_to 'Add Recipe', new_user_recipe_path, class: 'add-recipe-btn'%>
+    </div>
+</div>
