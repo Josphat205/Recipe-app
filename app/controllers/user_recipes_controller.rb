@@ -1,43 +1,51 @@
 # frozen_string_literal: true
 
 class UserRecipesController < ApplicationController
-  def index
-    @user_recipes = UserRecipe.created_by_current_user(current_user)
-  end
-
-  def show
-    @user_recipe = UserRecipe.find(params[:id])
-  end
-
   def new
-    @user_recipe = UserRecipe.new
+    @recipe = UserRecipe.new
   end
 
   def create
     @user = current_user
-    @user_recipe = UserRecipe.new(user_recipe_params)
-    @user_recipe.user = @user
-    if @user_recipe.save
-      redirect_to user_recipes_path, notice: 'Recipe was successfully created'
+    @recipe = @user.user_recipes.new(recipes_params)
+    @recipe.public = false
+    if @recipe.save
+      redirect_to user_recipes_path, notice: 'recipe was successfully created'
     else
-      render :new, alert: 'Recipe was not successfully created'
+      render :new, alert: "Couldn't create recipe for user"
     end
   end
 
+  def index
+    @recipes = UserRecipe.all
+  end
+
+  def show
+    @recipe = UserRecipe.find(params[:id])
+    @user = current_user
+    @recipe_foods = RecipeFood.includes(:food).where(user_recipe_id: @recipe.id)
+  end
+
   def destroy
-    @user_recipe = UserRecipe.find(params[:id])
-    authorize! :destroy, @user_recipe
-    @user_recipe.destroy
+    @recipe = UserRecipe.find(params[:id])
+    @recipe.destroy
     redirect_to user_recipes_path, notice: 'Recipe was successfully deleted'
   end
 
-  def public_recipes
-    @user_recipes = UserRecipe.public_recipes_ordered_by_newest
+  def update
+    @recipe = UserRecipe.find(params[:id])
+
+    if @recipe.public == true
+      @recipe.update(public: false)
+    else
+      UserRecipe.find(@recipe.id).update(public: true)
+    end
+    redirect_to user_recipe_path(@recipe.id), notice: 'Public Updated'
   end
 
   private
 
-  def user_recipe_params
-    params.require(:user_recipe).permit(:name, :preparation_time, :cooking_time, :description, :public)
+  def recipes_params
+    params.permit(:name, :description, :preparation_time, :cooking_time, current_user.id)
   end
 end

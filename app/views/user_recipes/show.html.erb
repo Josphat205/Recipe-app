@@ -1,23 +1,62 @@
-<% if @user_recipe.public || @user_recipe.user == current_user %>
-  <h1><%= @user_recipe.name %></h1>
-  <div>
-    <span>
-        preparation time: <%= @user_recipe.preparation_time %> Mins
-    </span><br>
-    <span>
-        Cooking time: <%= @user_recipe.cooking_time %> Mins
-    </span><br>
-    <span>
-        <%= @user_recipe.description %>
-    </span>
+<div class="container">
+  <h1 class="text-center my-2"><%= @recipe.name %></h1>
+  <div class="row mt-2 d-flex justify-content-center">
+    <div class="col-md-8">
+      <p>Preparation Time: <%= @recipe.preparation_time %></p>
+      <p>Preparation Time: <%= @recipe.cooking_time %></p>
+      <p>Step go here...</p>
+    </div>
+    <div class="col-md-4">
+        <%= form_with model:@recipe, url:user_recipe_path(@recipe.id), html:{method: :put} do |f| %>
+            <div class="form-check form-switch">
+              <%= f.label :public, class:"form-check-label" %>
+              <%= f.check_box :public, class:"form-check-input", onchange: "this.form.submit()" %>
+            </div>
+        <% end %>
+    </div>
   </div>
-  <div>
-      <% if @user_recipe.user == current_user %>
-        <p>form</p>
-      <% end %>
+  <div class="row">
+    <% if @recipe.user_id != @user.id  && @recipe.public == false %>
+      <div class="col-md-12">
+        <h3 class="text-center">This recipe is private</h3>
+      </div>
+    <% else %>
+
+        <div class="col-md-8">
+          <%= link_to 'General shopping list', shopping_list_index_path, class: 'btn btn-primary' %>
+        </div>
+        <div class="col-md-4">
+          <%= link_to 'Add Ingredient', new_user_recipe_recipe_food_path(@recipe.id), class: 'btn btn-primary' %>
+        </div>
+   
+      <table class="table table-hover table-bordered mt-4 table-responsive{-sm|-md|-lg|-xl} ">
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Value</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @recipe_foods.each do |food| %>
+            <tr>
+              <td><%= food.food.name%></td>
+              <td><%= food.quantity%><%= food.food.measurement_unit %></td>
+              <td>
+                <% sum = 0 %>
+                <% sum += food.quantity * food.food.price %>
+                <%= "Total price: $#{sum}" %>
+              </td>
+              <td>
+                
+                  <%= button_to "Delete", user_recipe_recipe_food_path(user_recipe_id:@recipe.id,id:food.id), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
+               
+              </td>
+            </tr>
+          <%end%>
+        </tbody>
+      </table>
+    <% end %>
   </div>
-  <% else %>
-  <div>
-  <span>You don't have permission to view this recipe</span>
-  </div>
-<% end %>
+</div>
