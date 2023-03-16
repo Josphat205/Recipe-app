@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 class FoodsController < ApplicationController
+  load_and_authorize_resource
   def index
-    @user = current_user
-    @foods = Food.where(user_id: @user.id)
+    @foods = Food.all
   end
 
   def new
