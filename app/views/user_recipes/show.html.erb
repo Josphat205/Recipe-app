@@ -1,0 +1,23 @@
+<% if @user_recipe.public || @user_recipe.user == current_user %>
+  <h1><%= @user_recipe.name %></h1>
+  <div>
+    <span>
+        preparation time: <%= @user_recipe.preparation_time %> Mins
+    </span><br>
+    <span>
+        Cooking time: <%= @user_recipe.cooking_time %> Mins
+    </span><br>
+    <span>
+        <%= @user_recipe.description %>
+    </span>
+  </div>
+  <div>
+      <% if @user_recipe.user == current_user %>
+        <p>form</p>
+      <% end %>
+  </div>
+  <% else %>
+  <div>
+  <span>You don't have permission to view this recipe</span>
+  </div>
+<% end %>
