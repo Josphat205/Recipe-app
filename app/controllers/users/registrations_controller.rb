@@ -6,7 +6,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # GET /resource/sign_up
 
-
   # POST /resource
   def create
     @user = User.new(user_params)
