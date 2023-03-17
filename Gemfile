@@ -58,11 +58,11 @@ end
 
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
-  gem 'web-console'
   gem 'bullet'
   gem 'rails-controller-testing'
   gem 'rspec-rails', '>= 3.9.0'
   gem 'shoulda-matchers', '~> 5.0'
+  gem 'web-console'
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"
 
