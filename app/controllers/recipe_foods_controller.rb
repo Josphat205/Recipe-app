@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class RecipeFoodsController < ApplicationController
+  load_and_authorize_resource
   def index
     @foods = current_user.recipes_foods.select(:food_id, 'SUM(quantity) as quantity').group(:food_id, :quantity)
     @sum = 0

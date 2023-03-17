@@ -26,7 +26,9 @@
           <%= link_to 'General shopping list', shopping_list_index_path, class: 'btn btn-primary' %>
         </div>
         <div class="col-md-4">
+        <% if @recipe.public == true %>
           <%= link_to 'Add Ingredient', new_user_recipe_recipe_food_path(@recipe.id), class: 'btn btn-primary' %>
+        <% end %>
         </div>
    
       <table class="table table-hover table-bordered mt-4 table-responsive{-sm|-md|-lg|-xl} ">
@@ -49,9 +51,9 @@
                 <%= "Total price: $#{sum}" %>
               </td>
               <td>
-                
+              <% if can? :destroy, @recipe %>
                   <%= button_to "Delete", user_recipe_recipe_food_path(user_recipe_id:@recipe.id,id:food.id), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
-               
+              <% end %>
               </td>
             </tr>
           <%end%>

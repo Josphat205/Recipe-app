@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class UserRecipesController < ApplicationController
+  load_and_authorize_resource
   def new
     @recipe = UserRecipe.new
   end
